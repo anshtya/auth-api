@@ -1,12 +1,22 @@
 const express = require('express');
+const dotenv = require('dotenv');
+const pool = require('./config/db');
 const app = express();
-const port = 3000;
 
 //routes
 const authRoutes = require('./routes/auth');
 
+//loads environment variables
+dotenv.config();
+
+//Connecting Postgres
+pool.connect((err, client, done) => {
+  if (err) throw err;
+  done();
+});
+
 app.use('/api', authRoutes);
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+app.listen(process.env.PORT, () => {
+  console.log(`listening on port ${process.env.PORT}`)
 });
