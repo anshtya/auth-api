@@ -1,6 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const pool = require('./config/db');
+const initDb = require('./database/db');
 const app = express();
 
 //routes
@@ -9,11 +9,8 @@ const authRoutes = require('./routes/auth');
 //loads environment variables
 dotenv.config();
 
-//Connecting Postgres
-pool.connect((err, client, done) => {
-  if (err) throw err;
-  done();
-});
+//Setup Postgres Database
+initDb();
 
 app.use('/api', authRoutes);
 
