@@ -35,4 +35,4 @@ const initDb = () => {
     createTables();
 };
 
-module.exports = initDb;
+module.exports = { initDb, pool };

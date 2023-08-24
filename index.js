@@ -1,6 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const initDb = require('./database/db');
+const { initDb } = require('./database/db');
 const app = express();
 
 //routes
@@ -12,6 +12,7 @@ dotenv.config();
 //Setup Postgres Database
 initDb();
 
+app.use(express.json());
 app.use('/api', authRoutes);
 
 app.listen(process.env.PORT, () => {
