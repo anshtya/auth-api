@@ -16,19 +16,18 @@ const pool = new Pool({
 
 const tableQueries = [userTableQuery];
 
-const createTables = () => {
-    pool.connect((err, _client, done) => {
-        if (err) throw err;
-
-        tableQueries.forEach(query => {
-            pool.query(query, (err, _result) => {
-                if (err) {
-                    console.error('Error creating table:', err.message);
-                }
-            })
-        });
-        done();
-    });
+const createTables = async () => {
+    const client = await pool.connect();
+    try {
+        for (const query of tableQueries) {
+            await client.query(query);
+        }
+        console.log('Tables created successfully');
+    } catch (error) {
+        console.error('Error creating table: ', error);
+    } finally {
+        client.release();
+    }
 };
 
 const initDb = () => {

@@ -29,7 +29,7 @@ router.post('/signup', async (req, res) => {
             res.status(201).json({ "access_token": `${token}` });
         }
     } catch (error) {
-        console.log("error: ", error)
+        console.error('error: ', error)
         res.status(500).json({ "error": "An error occured" });
     }
 });
@@ -59,7 +59,7 @@ router.post('/signin', async (req, res) => {
             }
         }
     } catch (error) {
-        console.log("error: ", error)
+        console.error('error: ', error)
         res.status(500).json({ "error": "An error occured" });
     }
 });
@@ -76,7 +76,7 @@ router.post('/checkusername', async (req, res) => {
             res.status(200).json({ "message": "OK" });
         }
     } catch (error) {
-        console.log("error: ", error)
+        console.error('error: ', error)
         res.status(500).json({ "error": "An error occured" });
     }
 });
