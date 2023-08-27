@@ -1,0 +1,23 @@
+services:
+  postgres-db:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=5678
+    ports:
+      - "5432:5432"
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres-db
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - PGHOST=postgres-db
+      - PGUSER=postgres
+      - PGDATABASE=postgres
+      - PGPASSWORD=5678
+      - PGPORT=5432
