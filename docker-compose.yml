@@ -6,7 +6,7 @@ services:
     environment:
       - POSTGRES_PASSWORD=${PGPASSWORD}
     ports:
-      - "5432:5432"
+      - "${PGPORT}:5432"
 
   app:
     build:
@@ -22,7 +22,7 @@ services:
       - PGUSER=postgres
       - PGDATABASE=postgres
       - PGPASSWORD=${PGPASSWORD}
-      - PGPORT=5432
+      - PGPORT=${PGPORT}
       - ACCESS_TOKEN=${ACCESS_TOKEN}
 
 volumes:
